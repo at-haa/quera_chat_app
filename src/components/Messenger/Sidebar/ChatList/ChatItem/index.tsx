@@ -5,6 +5,7 @@ interface ChatItemProps extends React.PropsWithChildren {
     avatar: string
 }
 export const ChatItem: React.FunctionComponent<ChatItemProps> = ({ name, time, lastMessage, avatar }): JSX.Element => {
+
     return (
         <div className="flex cursor-pointer ease-in duration-200 hover:bg-blue-300 p-2">
             <div className="w-full">

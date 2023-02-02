@@ -1,28 +1,32 @@
 import { AxiosResponse } from "axios";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
+import { Contacts } from "../../../../@Types/api.types";
+import { ContactActionTypes } from "../../../../@Types/context/context.type";
 import { AXIOS } from "../../../../config/axios.config";
 import { ApiRoutes } from "../../../../constants/api.route";
+import { AppContext } from "../../../../context/store";
 import { ChatItem } from "./ChatItem"
 
 interface ChatListProps extends React.PropsWithChildren {
 
 }
 export const ChatList: React.FunctionComponent<ChatListProps> = ({ children }): JSX.Element => {
-    const [contacts, setContacts] = useState<Contacts[]>([])
+    const dispatch = useContext(AppContext).dispatch
+    const state = useContext(AppContext).state    
     const fetchContacts = useCallback(async () => {
         const response = await AXIOS.get<any, AxiosResponse<Contacts[]>>(ApiRoutes.GetContacts)
         if (response.status == 200)
-            setContacts(response.data)
-    }, [])
+            dispatch({ type: ContactActionTypes.Get_All_Contacts, payload: response.data })
+    }, [dispatch])
 
     useEffect(() => {
         fetchContacts()
-    }, [])
+    }, [dispatch])
 
-    return (contacts.length === 0 ? <div>هنوز چتی وجود ندارد.</div> :
+    return (state.length === 0 ? <div>هنوز چتی وجود ندارد.</div> :
         <>
             {
-                contacts.map((item) => <ChatItem
+                state.map((item) => <ChatItem
                     key={item.id} name={item.name} avatar={item.avatar} lastMessage={item.lastMessage} time={item.lastMessageSent} />)
             }
         </>

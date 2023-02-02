@@ -1,4 +1,4 @@
-type Contacts = {
+export type Contacts = {
     id: string,
     name: string,
     avatar: string,
