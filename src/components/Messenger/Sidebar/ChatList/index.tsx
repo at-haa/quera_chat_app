@@ -12,7 +12,8 @@ interface ChatListProps extends React.PropsWithChildren {
 }
 export const ChatList: React.FunctionComponent<ChatListProps> = ({ children }): JSX.Element => {
     const dispatch = useContext(AppContext).dispatch
-    const state = useContext(AppContext).state    
+    const state = useContext(AppContext).state
+    const search = useContext(AppContext).search
     const fetchContacts = useCallback(async () => {
         const response = await AXIOS.get<any, AxiosResponse<Contacts[]>>(ApiRoutes.GetContacts)
         if (response.status == 200)
@@ -23,12 +24,21 @@ export const ChatList: React.FunctionComponent<ChatListProps> = ({ children }): 
         fetchContacts()
     }, [dispatch])
 
-    return (state.length === 0 ? <div>هنوز چتی وجود ندارد.</div> :
-        <>
-            {
-                state.map((item) => <ChatItem
-                    key={item.id} name={item.name} avatar={item.avatar} lastMessage={item.lastMessage} time={item.lastMessageSent} />)
-            }
-        </>
+    return (
+        
+        search.length == 0 ? state.length === 0 ? <div>هنوز چتی وجود ندارد.</div> :
+            <>
+                {
+                    state.map((item) => <ChatItem
+                        key={item.id} name={item.name} avatar={item.avatar} lastMessage={item.lastMessage} time={item.lastMessageSent} />)
+                }
+            </> :
+            <>
+                {
+                    search.map((item) => <ChatItem
+                        key={item.id} name={item.name} avatar={item.avatar} lastMessage={item.lastMessage} time={item.lastMessageSent} />)
+                }
+            </>
+
     )
 }
