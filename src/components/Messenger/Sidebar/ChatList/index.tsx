@@ -12,7 +12,7 @@ interface ChatListProps extends React.PropsWithChildren {
 }
 export const ChatList: React.FunctionComponent<ChatListProps> = ({ children }): JSX.Element => {
     const dispatch = useContext(AppContext).dispatch
-    const state = useContext(AppContext).state
+    const state = useContext(AppContext).state.contacts
     const search = useContext(AppContext).search
     const fetchContacts = useCallback(async () => {
         const response = await AXIOS.get<any, AxiosResponse<Contacts[]>>(ApiRoutes.GetContacts)
@@ -30,13 +30,13 @@ export const ChatList: React.FunctionComponent<ChatListProps> = ({ children }): 
             <>
                 {
                     state.map((item) => <ChatItem
-                        key={item.id} name={item.name} avatar={item.avatar} lastMessage={item.lastMessage} time={item.lastMessageSent} />)
+                        key={item.id} name={item.name} avatar={item.avatar} lastMessage={item.lastMessage} time={item.lastMessageSent} roomId={item.roomId}/>)
                 }
             </> :
             <>
                 {
                     search.map((item) => <ChatItem
-                        key={item.id} name={item.name} avatar={item.avatar} lastMessage={item.lastMessage} time={item.lastMessageSent} />)
+                        key={item.id} name={item.name} avatar={item.avatar} lastMessage={item.lastMessage} time={item.lastMessageSent} roomId={item.roomId}/>)
                 }
             </>
 

@@ -4,6 +4,7 @@ export type ContactState = {
     avatar: string,
     lastMessageSent: string,
     lastMessage: string,
+    roomId: string
 }
 
 export enum ContactActionTypes {
@@ -13,4 +14,24 @@ export enum ContactActionTypes {
 export type ContextAction<T, K> = {
     type: T,
     payload: K
+}
+
+export type MessageItem = {
+    isSentByOwner: boolean,
+    id: number,
+    value: string
+}
+export type MessageState = {
+    roomId: string,
+    MessageList: MessageItem[] | []
+}
+
+export enum MessageActionTypes {
+    Get_Current_Messages = "Get_Current_Messages"
+}
+
+
+export type ContextAppState = {
+    contacts: ContactState[],
+    messages: MessageState
 }

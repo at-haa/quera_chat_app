@@ -1,13 +1,29 @@
+import { AxiosResponse } from "axios"
+import { useContext } from "react"
+import { MessageActionTypes, MessageState } from "../../../../../@Types/context/context.type"
+import { AXIOS } from "../../../../../config/axios.config"
+import { ApiRoutes } from "../../../../../constants/api.route"
+import { AppContext } from "../../../../../context/store"
+
 interface ChatItemProps extends React.PropsWithChildren {
     name: string,
     time: string,
     lastMessage: string,
-    avatar: string
+    avatar: string,
+    roomId: string,
 }
-export const ChatItem: React.FunctionComponent<ChatItemProps> = ({ name, time, lastMessage, avatar }): JSX.Element => {
-
+export const ChatItem: React.FunctionComponent<ChatItemProps> = ({ name, time, lastMessage, avatar, roomId }): JSX.Element => {
+    const dispatch = useContext(AppContext).dispatch
+    const handleClickItem = (roomId: string) => {
+        AXIOS.get(`${ApiRoutes.GetMessages}${roomId}`).then(
+            res => {
+                if (res?.data?.length > 0) dispatch({ type: MessageActionTypes.Get_Current_Messages, payload: res?.data[0] })
+            }
+        ).catch(err => console.log(err)
+        )
+    }
     return (
-        <div className="flex cursor-pointer ease-in duration-200 hover:bg-blue-300 p-2">
+        <div className="flex cursor-pointer ease-in duration-200 hover:bg-blue-300 p-2" onClick={() => handleClickItem(roomId)}>
             <div className="w-full">
                 <div className="flex justify-between items-center">
                     <h6 className="text-sm font-semibold">{new Date(time).toLocaleDateString("fa-ir")}</h6>

@@ -6,7 +6,7 @@ interface SearchBarProps extends React.PropsWithChildren {
 
 }
 export const SearchBar: React.FunctionComponent<SearchBarProps> = ({ children }): JSX.Element => {
-    const state = useContext(AppContext).state
+    const state = useContext(AppContext).state.contacts
     const setSearch = useContext(AppContext).setSearch
     const handleFilter = (e:any)=>{
         const filterContacts = state.filter(n=>n.name.includes(e.target.value))
