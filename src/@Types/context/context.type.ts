@@ -8,7 +8,8 @@ export type ContactState = {
 }
 
 export enum ContactActionTypes {
-    Get_All_Contacts = "Get_All_Contacts"
+    Get_All_Contacts = "Get_All_Contacts",
+    Search_All_Contacts = "Search_All_Contacts"
 }
 
 export type ContextAction<T, K> = {
@@ -23,15 +24,21 @@ export type MessageItem = {
 }
 export type MessageState = {
     roomId: string,
-    MessageList: MessageItem[] | []
+    MessageList: MessageItem[]
 }
 
 export enum MessageActionTypes {
-    Get_Current_Messages = "Get_Current_Messages"
+    Get_Current_Messages = "Get_Current_Messages",
+    Send_new_Messages = "Send_new_Messages"
 }
 
 
 export type ContextAppState = {
-    contacts: ContactState[],
+    contacts: ConatactListState,
     messages: MessageState
+}
+
+export type ConatactListState = {
+    contactslist:ContactState[],
+    searchlist:ContactState[],
 }

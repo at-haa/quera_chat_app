@@ -1,3 +1,6 @@
+import classNames from "classnames"
+import { useContext, useState } from "react"
+import { AppContext } from "../../../context/store"
 import { ChatHeader } from "../Main/ChatHeader"
 import { ChatMessage } from "../Main/ChatMessage"
 import { ChatPreview } from "../Main/ChatPreview"
@@ -9,17 +12,22 @@ interface MessengerLayoutProps extends React.PropsWithChildren {
 
 }
 export const MessengerLayout: React.FunctionComponent<MessengerLayoutProps> = ({ children }): JSX.Element => {
+    const messages = useContext(AppContext).state.messages
     return (
         <div className="flex bg-white h-full rounded-lg max-w-7xl mx-auto">
-            <div className="flex-1">
-                <div className="flex flex-col h-full">
-                {/* <ChatHeader /> */}
-                <ChatPreview/>
-                {/* <ChatMessage /> */}
-                {/* <ChatSender /> */}
+            <div className={classNames("flex-1", !messages.roomId && "hidden sm:flex")}>
+                <div className="flex flex-col h-full ">
+                    {
+                        messages.roomId ? <>
+                            <ChatHeader />
+                            <ChatMessage />
+                            <ChatSender /></> :
+                            <ChatPreview />
+                    }
+
                 </div>
             </div>
-            <div className="flex-[0_0_350px] flex-col">
+            <div className={classNames("sm:flex-[0_0_250px] flex-col flex-[1_1_auto]", messages.roomId && "hidden sm:flex")}>
                 <SearchBar />
                 <div className="flex flex-col overflow-y-auto h-[calc(100%-48px)] border-[1px]">
                     <ChatList />

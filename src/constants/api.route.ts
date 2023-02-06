@@ -1,4 +1,4 @@
 export const ApiRoutes = {
     GetContacts:"/contacts",
-    GetMessages:"/Messages?roomId="
+    GetMessages:"/Messages?roomId=",
 }
