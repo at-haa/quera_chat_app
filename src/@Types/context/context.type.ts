@@ -35,10 +35,19 @@ export enum MessageActionTypes {
 
 export type ContextAppState = {
     contacts: ConatactListState,
-    messages: MessageState
+    messages: MessageState,
+    user: UserAppState
+}
+export type UserAppState = {
+    username: string,
+    token: string
 }
 
 export type ConatactListState = {
-    contactslist:ContactState[],
-    searchlist:ContactState[],
+    contactslist: ContactState[],
+    searchlist: ContactState[],
+}
+
+export enum UserActionTypes {
+    Login_success = "Login_success",
 }

@@ -14,9 +14,9 @@ interface MessengerLayoutProps extends React.PropsWithChildren {
 export const MessengerLayout: React.FunctionComponent<MessengerLayoutProps> = ({ children }): JSX.Element => {
     const messages = useContext(AppContext).state.messages
     return (
-        <div className="flex bg-white h-full rounded-lg max-w-7xl mx-auto">
-            <div className={classNames("flex-1", !messages.roomId && "hidden sm:flex")}>
-                <div className="flex flex-col h-full ">
+        <div className="flex bg-white h-full rounded-lg max-w-7xl mx-auto w-full">
+            <div className={classNames("flex-1 w-full", !messages.roomId && "hidden sm:flex justify-center")}>
+                <div className="flex flex-col h-full">
                     {
                         messages.roomId ? <>
                             <ChatHeader />

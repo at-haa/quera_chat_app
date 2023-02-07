@@ -8,17 +8,14 @@ interface ChatSenderProps extends React.PropsWithChildren {
 }
 export const ChatSender: React.FunctionComponent<ChatSenderProps> = ({ children }): JSX.Element => {
     const [text, setText] = useState("")
-    const {dispatch } = useContext(AppContext)
+    const { dispatch } = useContext(AppContext)
     const body: MessageItem = {
         isSentByOwner: false,
         id: Math.floor(Math.random() * 100000000),
         value: text
     }
     const handleOnChange = (e: any) => {
-
-
         setText(e.target.value)
-
     }
     const handleSendMessage = (e: any) => {
         // AXIOS.post(`${ApiRoutes.GetMessages}${messages.roomId}/MessageList`, body).then(res => {
@@ -26,7 +23,7 @@ export const ChatSender: React.FunctionComponent<ChatSenderProps> = ({ children 
         //     setText("")
         // }
         // )
-        dispatch({type:MessageActionTypes.Send_new_Messages,payload:body})
+        dispatch({ type: MessageActionTypes.Send_new_Messages, payload: body })
         console.log(text);
         setText("")
 
