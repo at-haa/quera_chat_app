@@ -5,12 +5,13 @@ import { AppContextProvider } from './context/store';
 import { HomePage } from './pages';
 import { Login } from './pages/login';
 import { Provider } from 'react-redux';
-import { ReduxStore } from './redux/store';
+// import { ReduxStore } from './redux/store'; oooold
+import { ReduxStore } from './new-redux/store';
 
 function App() {
   return (
     // <AppContextProvider>
-    <Provider store={ReduxStore()}>
+    <Provider store={ReduxStore}>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Layout />}>

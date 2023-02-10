@@ -24,7 +24,7 @@ const AppContext = createContext<{ state: ContextAppState, dispatch: React.Dispa
     dispatch: () => null,
 })
 
-const combineReducer = ({ contacts, messages,user }: ContextAppState, action: any) => ({
+const combineReducer = ({ contacts, messages, user }: ContextAppState, action: any) => ({
     contacts: ContactReducer(contacts, action),
     messages: messagesReducer(messages, action),
     user: userReducer(user, action)
