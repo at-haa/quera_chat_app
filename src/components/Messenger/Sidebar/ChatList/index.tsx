@@ -16,15 +16,15 @@ interface ChatListProps extends React.PropsWithChildren {
 }
 export const ChatList: React.FunctionComponent<ChatListProps> = ({ children }): JSX.Element => {
     // new redux
-    const dispatch = useDispatch<AppDispatch>();
-    const state = useSelector<RootState>(
-        (state) => state
-    ) as {
-        contacts: ConatactListState;
-    };
-    useEffect(() => {
-        dispatch(GetAllContactsAsyncNew());
-    }, []);
+    // const dispatch = useDispatch<AppDispatch>();
+    // const state = useSelector<RootState>(
+    //     (state) => state
+    // ) as {
+    //     contacts: ConatactListState;
+    // };
+    // useEffect(() => {
+    //     dispatch(GetAllContactsAsyncNew());
+    // }, []);
 
     //  Redux
     // const state = useSelector(state=>state) as any    
@@ -34,17 +34,18 @@ export const ChatList: React.FunctionComponent<ChatListProps> = ({ children }): 
     // }, [dispatch])
 
     // Context
-    // const {dispatch,state} = useContext(AppContext)
-    // const fetchContacts = useCallback(async () => {
-    //     const response = await AXIOS.get<any, AxiosResponse<Contacts[]>>(ApiRoutes.GetContacts)
-    //     if (response.status == 200)
-    //         dispatch({ type: ContactActionTypes.Get_All_Contacts, payload: response.data })
-    // }, [dispatch])
+    const {dispatch,state} = useContext(AppContext)
+    const fetchContacts = useCallback(async () => {
+        const response = await AXIOS.get<any, AxiosResponse<Contacts[]>>(ApiRoutes.GetContacts) 
+        if (response.status == 200)
+            dispatch({ type: ContactActionTypes.Get_All_Contacts, payload: response.data })
+    }, [dispatch])
 
-    // useEffect(() => {
-    //     fetchContacts()
-    // }, [dispatch])
-
+    useEffect(() => {
+        fetchContacts()
+        
+        
+    }, [dispatch])
     return (
 
         state.contacts.searchlist.length == 0 ? state.contacts.contactslist.length === 0 ? <div>هنوز چتی وجود ندارد.</div> :
