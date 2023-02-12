@@ -29,7 +29,8 @@ export type MessageState = {
 
 export enum MessageActionTypes {
     Get_Current_Messages = "Get_Current_Messages",
-    Send_new_Messages = "Send_new_Messages"
+    Send_new_Messages = "Send_new_Messages",
+    Remove_Message = "Remove_Message",
 }
 
 

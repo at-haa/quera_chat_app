@@ -12,7 +12,7 @@ import { PrivateRoute } from './PrivateRoute';
 function App() {
   return (
     <AppContextProvider>
-    // <Provider store={ReduxStore}>
+    {/* <Provider store={ReduxStore}> */}
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Layout />}>
@@ -28,7 +28,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
-    // </Provider>
+    {/* </Provider> */}
     </AppContextProvider>
   );
 }

@@ -24,7 +24,6 @@ export const ChatSender: React.FunctionComponent<ChatSenderProps> = ({ children 
         // }
         // )
         dispatch({ type: MessageActionTypes.Send_new_Messages, payload: body })
-        console.log(text);
         setText("")
 
     }

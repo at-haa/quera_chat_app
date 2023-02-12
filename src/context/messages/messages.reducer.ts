@@ -7,10 +7,10 @@ export const messagesReducer = (state: MessageState, action: ContextAction<Messa
             state.MessageList = action.payload.MessageList;
             return state
         case MessageActionTypes.Send_new_Messages:
-            console.log(action.payload);
             state.MessageList.push(action.payload)
-            console.log(state.MessageList);
-            
+            return state
+        case MessageActionTypes.Remove_Message:
+            state.MessageList = state.MessageList.filter(msg=>msg.id!==action.payload)
             return state
         default:
             return state

@@ -17,8 +17,6 @@ export const GetAllContactsAsync =
             ApiRoutes.GetContacts
         );
         if (response.status === 200) {
-            console.log(response.data);
-            
             dispatch(GetAllContacts(response.data));
         }
     };

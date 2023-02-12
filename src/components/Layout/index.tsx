@@ -11,9 +11,7 @@ interface LayoutProps extends React.PropsWithChildren {
 export const Layout: React.FunctionComponent<LayoutProps> = (): JSX.Element => {
     const { dispatch,state } = useContext(AppContext);
     const getToken = localStorage.getItem("token");
-    const username = localStorage.getItem("username");
-    console.log(state);
-    
+    const username = localStorage.getItem("username");    
     useEffect(() => {        
       dispatch({
         type: UserActionTypes.Login_success,
