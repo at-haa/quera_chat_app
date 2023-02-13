@@ -10,7 +10,11 @@ export const messagesReducer = (state: MessageState, action: ContextAction<Messa
             state.MessageList.push(action.payload)
             return state
         case MessageActionTypes.Remove_Message:
-            state.MessageList = state.MessageList.filter(msg=>msg.id!==action.payload)
+            state.MessageList = state.MessageList.filter(msg => msg.id !== action.payload)
+            return state
+        case MessageActionTypes.Exit_Room:
+            state.MessageList = []
+            state.roomId = ""
             return state
         default:
             return state
